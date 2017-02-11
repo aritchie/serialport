@@ -1,7 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <Authors>Allan Ritchie</Authors>
+    <Company />
+    <Product>ACR Reactive Serial Port Plugin for Xamarin and Windows</Product>
+    <Description>ACR Reactive Serial Port Plugin for Xamarin and Windows</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Plugin.IO.SerialPort.Abstractions\Plugin.IO.SerialPort.Abstractions.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Plugin.IO.SerialPort.Shared\Plugin.IO.SerialPort.Shared.projitems" Label="Shared" />
 
 </Project>

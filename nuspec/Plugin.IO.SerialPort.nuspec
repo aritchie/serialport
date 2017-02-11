@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Plugin.IO.SerialPort</id>
+        <version>1.0.0</version>
+        <title>ACR Serial Port Plugin for Android and Windows</title>
+        <summary>ACR Serial Port Plugin for Android and Windows</summary>
+        <description>
+Cross Platform Serial Port Plugin for Xamarin
+
+Supported Platforms
+Android 4.3+
+Windows
+        </description>
+        <authors>Allan Ritchie</authors>
+        <owners>Allan Ritchie</owners>
+        <iconUrl>https://github.com/aritchie/serialport/raw/master/icon.png</iconUrl>
+        <licenseUrl>https://github.com/aritchie/serialport/LICENSE.md</licenseUrl>
+        <projectUrl>https://github.com/aritchie/serialport</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>android windows uwp xamarin serial port reactive rx</tags>
+        <dependencies>
+            <dependency id="System.Reactive" version="[3.1.1, 4)" />
+        </dependencies>
+        <releaseNotes>
+1.0
+Initial Public Release
+        </releaseNotes>
+    </metadata>
+    <files>
+        <!-- netstandard -->
+        <file src="..\Plugin.IO.SerialPort\bin\Release\Plugin.IO.SerialPort.*" target="lib\netstandard1.0" />
+
+        <!-- android -->
+        <file src="..\Plugin.IO.SerialPort.Android\bin\Release\Plugin.IO.SerialPort.*" target="lib\MonoAndroid10" />
+
+        <!-- windows -->
+        <file src="..\Plugin.IO.SerialPort.Uwp\bin\Release\Plugin.IO.SerialPort.*" target="lib\uap10.0" />
+    </files>
+</package>

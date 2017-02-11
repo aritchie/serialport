@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <RootNamespace>Plugin.IO.SerialPort</RootNamespace>
+    <Authors>Allan Ritchie</Authors>
+    <Company></Company>
+    <Product>ACR Reactive Serial Port Plugin for Xamarin and Windows</Product>
+    <Description>ACR Reactive Serial Port Plugin for Xamarin and Windows</Description>
+  </PropertyGroup>
+
+</Project>
