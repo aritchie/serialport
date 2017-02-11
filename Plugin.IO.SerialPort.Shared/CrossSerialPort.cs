@@ -5,18 +5,18 @@ namespace Plugin.IO.SerialPort
 {
     public static class CrossSerialPort
     {
-        static ISerialPort instance;
-        public static ISerialPort Current
+        static ISerialDeviceManager instance;
+        public static ISerialDeviceManager Current
         {
             get
             {
 #if PORTABLE
                 if (instance == null)
-                    throw new ArgumentException("[Acr.Ble] No platform plugin found.  Did you install the nuget package in your app project as well?");
+                    throw new ArgumentException("[Plugin.IO.SerialPort] No platform plugin found.  Did you install the nuget package in your app project as well?");
 
                 return instance;
 #else
-                instance = instance ?? new SerialPortImpl();
+                instance = instance ?? new SerialDeviceManager();
                 return instance;
 #endif
             }

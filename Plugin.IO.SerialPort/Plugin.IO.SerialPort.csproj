@@ -8,6 +8,14 @@
     <Description>ACR Reactive Serial Port Plugin for Xamarin and Windows</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Plugin.IO.SerialPort.Abstractions\Plugin.IO.SerialPort.Abstractions.csproj" />
   </ItemGroup>

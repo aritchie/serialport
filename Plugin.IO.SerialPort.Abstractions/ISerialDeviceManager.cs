@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
 namespace Plugin.IO.SerialPort
 {
-    public interface ISerialPort
+    public interface ISerialDeviceManager
     {
         //serialPort.WriteTimeout = TimeSpan.FromMilliseconds(1000);
         //serialPort.ReadTimeout = TimeSpan.FromMilliseconds(1000);
@@ -13,8 +14,7 @@ namespace Plugin.IO.SerialPort
         //serialPort.StopBits = SerialStopBitCount.One;
         //serialPort.DataBits = 8;
 
-        Task<bool> Connect(SerialConnectionConfig config = null);
-        void Disconnect();
+        Task<IEnumerable<ISerialDevice>> GetAvailableDevices();
     }
 }
 /* MAC
@@ -23,11 +23,7 @@ namespace Plugin.IO.SerialPort
     public static void Main()
     {
         SerialPort usb = new SerialPort();
-        usb.PortName = "/dev/tty.usbmodem1421";
-        usb.BaudRate = 9600;
-        usb.Parity = Parity.None;
-        usb.DataBits = 8;
-        usb.StopBits = StopBits.One;
+
 
         usb.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
