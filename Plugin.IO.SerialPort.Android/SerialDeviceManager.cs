@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -14,6 +15,7 @@ namespace Plugin.IO.SerialPort
         {
             //return System.IO.Ports.SerialPo;
             var manager = (UsbManager) Application.Context.GetSystemService(Context.UsbService);
+            //manager.DeviceList.Select(x => x.Value.)
             //manager.RequestPermission(device, pendingintent);
             return null;
         }

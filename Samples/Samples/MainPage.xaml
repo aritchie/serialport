@@ -4,5 +4,11 @@
              xmlns:local="clr-namespace:Samples"
              x:Class="Samples.MainPage"
              Title="Serial Ports">
-
+    <ListView ItemsSource="{Binding Devices}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
