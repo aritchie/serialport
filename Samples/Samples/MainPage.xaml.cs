@@ -9,6 +9,17 @@ namespace Samples
 		public MainPage()
 		{
 			this.InitializeComponent();
+            this.BindingContext = new MainViewModel();
 		}
+
+
+	    protected override void OnAppearing()
+	    {
+	        base.OnAppearing();
+	        this.ViewModel.Start();
+	    }
+
+
+	    MainViewModel ViewModel => (MainViewModel) this.BindingContext;
 	}
 }

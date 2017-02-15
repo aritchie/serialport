@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Samples.DevicePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Text}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" />
+            <Entry Text="{Binding Command}" Grid.Column="0" Grid.Row="1" />
+            <Button Text="Send" Command="{Binding Send}" Grid.Column="1" Grid.Row="1" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
