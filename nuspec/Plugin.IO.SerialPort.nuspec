@@ -11,6 +11,7 @@ Cross Platform Serial Port Plugin for Xamarin
 Supported Platforms
 Android 4.3+
 Windows
+NET Full 4.5
         </description>
         <authors>Allan Ritchie</authors>
         <owners>Allan Ritchie</owners>
@@ -33,6 +34,9 @@ Initial Public Release
 
         <!-- android -->
         <file src="..\Plugin.IO.SerialPort.Android\bin\Release\Plugin.IO.SerialPort.*" target="lib\MonoAndroid10" />
+
+        <!-- net45 -->
+        <file src="..\Plugin.IO.SerialPort.Net\bin\Release\Plugin.IO.SerialPort.*" target="lib\net45" />
 
         <!-- windows -->
         <file src="..\Plugin.IO.SerialPort.Uwp\bin\Release\Plugin.IO.SerialPort.*" target="lib\uap10.0" />

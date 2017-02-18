@@ -45,7 +45,6 @@ namespace Plugin.IO.SerialPort
             this.connection = this.manager.OpenDevice(this.device);
             var i = this.device.GetInterface(0);
             var e = i.GetEndpoint(0);
-            e.
             //this.connection.SetConfiguration(new UsbConfiguration())
             //this.connection.ControlTransfer(UsbAddressing.In, 0, 0, 0, buffer, 0, buffer.Length)
             //this.manager.GetAccessoryList();
