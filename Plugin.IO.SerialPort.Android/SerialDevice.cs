@@ -43,8 +43,10 @@ namespace Plugin.IO.SerialPort
         public async Task Open()
         {
             this.connection = this.manager.OpenDevice(this.device);
-            var i = this.device.GetInterface(0);
-            var e = i.GetEndpoint(0);
+            if (this.connection == null)
+            {
+                //this.manager.RequestPermission(this.device, Pend);
+            }
             //this.connection.SetConfiguration(new UsbConfiguration())
             //this.connection.ControlTransfer(UsbAddressing.In, 0, 0, 0, buffer, 0, buffer.Length)
             //this.manager.GetAccessoryList();

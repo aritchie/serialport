@@ -11,30 +11,29 @@ namespace Plugin.IO.SerialPort
 {
     public class SerialDeviceManager : ISerialDeviceManager
     {
+        readonly UsbManager manager;
+
+
+        public SerialDeviceManager()
+        {
+            this.manager = (UsbManager)Application.Context.GetSystemService(Context.UsbService);
+        }
+
         public Task<IEnumerable<ISerialDevice>> GetAvailableDevices()
         {
-            //return System.IO.Ports.SerialPo;
-            var manager = (UsbManager) Application.Context.GetSystemService(Context.UsbService);
-            //manager.DeviceList.Select(x => x.Value.)
-            //manager.RequestPermission(device, pendingintent);
-            return null;
+            var devices = this.manager.DeviceList.Select(x => new SerialDevice(x.Value, this.manager));
+            return Task.FromResult<IEnumerable<ISerialDevice>>(devices);
         }
     }
 }
 /*
+ * http://stackoverflow.com/questions/10183794/how-to-communicate-with-a-usb-device
 UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
 if (availableDrivers.isEmpty()) {
   return;
 }
 
-// Open a connection to the first available driver.
-UsbSerialDriver driver = availableDrivers.get(0);
-UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
-if (connection == null) {
-  // You probably need to call UsbManager.requestPermission(driver.getDevice(), ..)
-  return;
-}
 
 // Read some data! Most have just one port (port 0).
 UsbSerialPort port = driver.getPorts().get(0);
@@ -88,4 +87,54 @@ try {
       android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
       android:resource="@xml/device_filter" />
 </activity>
+
+
+private static final String ACTION_USB_PERMISSION = "com.multitools.andres.LCView";
+    UsbDevice device;
+    //Pide permisos al usuario para comunicacion con el dispositivo USB
+    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ACTION_USB_PERMISSION.equals(action)) {
+                synchronized (this) {
+                    UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        if(device != null){
+                            //call method to set up device communication
+                        }
+                    } 
+                    else {
+                        Log.d(TAG, "permission denied for device " + device);
+                    }
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(DEBUG) Log.i(TAG, "onCreate() -> MainMenu");
+
+        actionBar = getActionBar();                     //obtengo el ActionBar
+        actionBar.setDisplayHomeAsUpEnabled(true);      //el icono de la aplicacion funciona como boton HOME
+        //Menu
+        setListAdapter(new ArrayAdapter<String>(MainMenu.this, android.R.layout.simple_list_item_1, MenuNames));
+
+        //USB
+        if(DEBUG) Log.i(TAG, "Setting UsbManager -> MainMenu");
+        UsbManager mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        PendingIntent mPermissionIntent;
+
+        if(DEBUG) Log.i(TAG, "Setting PermissionIntent -> MainMenu");
+        mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+        if(DEBUG) Log.i(TAG, "Setting IntentFilter -> MainMenu");
+        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+        if(DEBUG) Log.i(TAG, "Setting registerReceiver -> MainMenu");
+        registerReceiver(mUsbReceiver, filter);
+        if(DEBUG) Log.i(TAG, "Setting requestPermission -> MainMenu");
+        mUsbManager.requestPermission(device, mPermissionIntent);
+
+    }
 */

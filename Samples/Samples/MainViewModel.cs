@@ -15,21 +15,32 @@ namespace Samples
         public MainViewModel()
         {
             this.OpenDevice = new Command<ISerialDevice>(x =>
+                App.Current.MainPage.Navigation.PushAsync(new DevicePage
+                {
+                    BindingContext = new DeviceViewModel(x)
+                })
+            );
+            this.FindDevices = new Command(async () =>
             {
-
+                var devs = await CrossSerialPort.Current.GetAvailableDevices();
+                this.Devices = devs.ToList();
+                if (this.Devices.Count > 0)
+                {
+                    this.NoDevicesFound = false;
+                    this.OnPropertyChanged(nameof(this.Devices));
+                }
+                else
+                {
+                    this.NoDevicesFound = true;
+                }
+                this.OnPropertyChanged(nameof(NoDevicesFound));
             });
         }
 
 
-        public async void Start()
-        {
-            var devs = await CrossSerialPort.Current.GetAvailableDevices();
-            this.Devices = devs.ToList();
-            this.OnPropertyChanged(nameof(this.Devices));
-        }
-
-
+        public ICommand FindDevices { get; }
         public ICommand OpenDevice { get; }
+        public bool NoDevicesFound { get; private set; }
         public IList<ISerialDevice> Devices { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

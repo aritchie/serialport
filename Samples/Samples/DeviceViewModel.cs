@@ -15,6 +15,8 @@ namespace Samples
     {
         public DeviceViewModel(ISerialDevice device)
         {
+            this.Text = device.PortName;
+
             this.Send = new Command(() =>
             {
                 if (this.ConnectText == "Connect")
