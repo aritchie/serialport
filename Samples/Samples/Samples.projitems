@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DeviceItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DevicePage.xaml.cs">
       <DependentUpon>DevicePage.xaml</DependentUpon>
       <SubType>Code</SubType>

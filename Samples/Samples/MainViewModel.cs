@@ -14,34 +14,32 @@ namespace Samples
     {
         public MainViewModel()
         {
-            this.OpenDevice = new Command<ISerialDevice>(x =>
-                App.Current.MainPage.Navigation.PushAsync(new DevicePage
-                {
-                    BindingContext = new DeviceViewModel(x)
-                })
-            );
             this.FindDevices = new Command(async () =>
             {
+                this.IsLoading = true;
                 var devs = await CrossSerialPort.Current.GetAvailableDevices();
-                this.Devices = devs.ToList();
+                this.Devices = devs.Select(x => new DeviceItemViewModel(x)).ToList();
+                this.IsLoading = false;
                 if (this.Devices.Count > 0)
                 {
                     this.NoDevicesFound = false;
-                    this.OnPropertyChanged(nameof(this.Devices));
                 }
                 else
                 {
                     this.NoDevicesFound = true;
                 }
-                this.OnPropertyChanged(nameof(NoDevicesFound));
+
+                this.OnPropertyChanged(String.Empty);
             });
         }
 
 
         public ICommand FindDevices { get; }
-        public ICommand OpenDevice { get; }
         public bool NoDevicesFound { get; private set; }
-        public IList<ISerialDevice> Devices { get; private set; }
+        public bool IsLoading { get; private set; }
+
+
+        public IList<DeviceItemViewModel> Devices { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
