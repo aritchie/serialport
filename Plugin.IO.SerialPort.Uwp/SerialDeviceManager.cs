@@ -14,7 +14,7 @@ namespace Plugin.IO.SerialPort
         {
             var aqs = Native.GetDeviceSelector();
             var natives = await DeviceInformation.FindAllAsync(aqs);
-            return natives.Select(x => new SerialDevice(x.Name));
+            return natives.Select(x => new SerialDevice(x));
         }
     }
 }

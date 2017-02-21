@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 using Windows.Devices.SerialCommunication;
 using Native = Windows.Devices.SerialCommunication.SerialDevice;
 
@@ -12,9 +13,9 @@ namespace Plugin.IO.SerialPort
         Native device;
 
 
-        public SerialDevice(string portName)
+        public SerialDevice(DeviceInformation deviceInfo)
         {
-            this.PortName = portName;
+            this.PortName = deviceInfo.Id;
         }
 
 
@@ -24,7 +25,7 @@ namespace Plugin.IO.SerialPort
         public bool IsConnected => this.device != null;
 
         public uint BaudRate { get; set; } = 115200;
-        public ushort DataBits { get; set; } = 7;
+        public ushort DataBits { get; set; } = 8;
         public Parity Parity { get; set; } = Parity.None;
         public StopBit StopBit { get; set; } = StopBit.One;
 

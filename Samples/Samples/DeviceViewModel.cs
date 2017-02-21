@@ -75,7 +75,7 @@ namespace Samples
         public ICommand Send { get; }
         public ICommand ToggleConnection { get; }
         public ICommand Close { get; }
-        public string CommandText { get; set; }
+        public string Command { get; set; }
         public string ConnectText { get; set; } = "Connect";
         public string Text { get; set; }
 
