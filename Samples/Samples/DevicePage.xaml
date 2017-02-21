@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.DevicePage"
              Title="Device">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Close" Command="{Binding Close}" />
+        <ToolbarItem Text="{Binding ConnectText}" Command="{Binding ToggleConnection}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
