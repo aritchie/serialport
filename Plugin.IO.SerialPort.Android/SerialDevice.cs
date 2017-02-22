@@ -2,6 +2,8 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Android.App;
+using Android.Content;
 using Android.Hardware.Usb;
 
 
@@ -44,6 +46,15 @@ namespace Plugin.IO.SerialPort
         {
             if (!this.manager.HasPermission(this.device))
             {
+                //mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+                //if (DEBUG) Log.i(TAG, "Setting IntentFilter -> MainMenu");
+                //IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+                //if (DEBUG) Log.i(TAG, "Setting registerReceiver -> MainMenu");
+                //registerReceiver(mUsbReceiver, filter);
+                //if (DEBUG) Log.i(TAG, "Setting requestPermission -> MainMenu");
+                //mUsbManager.requestPermission(device, mPermissionIntent);
+                //https://developer.xamarin.com/api/member/Android.Hardware.Usb.UsbManager.RequestPermission/p/Android.Hardware.Usb.UsbDevice/Android.App.PendingIntent/
+                var permissionIntent = PendingIntent.GetBroadcast(Application.Context, 0, new Intent(UsbManager.), )
                 //this.manager.RequestPermission();
                 // TODO: callback
             }

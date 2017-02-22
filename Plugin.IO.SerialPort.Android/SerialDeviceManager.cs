@@ -9,6 +9,7 @@ using Android.Hardware.Usb;
 
 namespace Plugin.IO.SerialPort
 {
+    //https://developer.android.com/guide/topics/connectivity/usb/accessory.html
     public class SerialDeviceManager : ISerialDeviceManager
     {
         readonly UsbManager manager;
@@ -51,32 +52,6 @@ try {
 }
 
 
-// res/xml/device_filter.xml
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- 0x0403 / 0x6001: FTDI FT232R UART -->
-    <usb-device vendor-id="1027" product-id="24577" />
-
-    <!-- 0x0403 / 0x6015: FTDI FT231X -->
-    <usb-device vendor-id="1027" product-id="24597" />
-
-    <!-- 0x2341 / Arduino -->
-    <usb-device vendor-id="9025" />
-
-    <!-- 0x16C0 / 0x0483: Teensyduino  -->
-    <usb-device vendor-id="5824" product-id="1155" />
-
-    <!-- 0x10C4 / 0xEA60: CP210x UART Bridge -->
-    <usb-device vendor-id="4292" product-id="60000" />
-
-    <!-- 0x067B / 0x2303: Prolific PL2303 -->
-    <usb-device vendor-id="1659" product-id="8963" />
-
-    <!-- 0x1a86 / 0x7523: Qinheng CH340 -->
-    <usb-device vendor-id="6790" product-id="29987" />
-</resources>
-
-
 <activity
     android:name="..."
     ...>
@@ -87,30 +62,6 @@ try {
       android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
       android:resource="@xml/device_filter" />
 </activity>
-
-
-private static final String ACTION_USB_PERMISSION = "com.multitools.andres.LCView";
-    UsbDevice device;
-    //Pide permisos al usuario para comunicacion con el dispositivo USB
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_USB_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        if(device != null){
-                            //call method to set up device communication
-                        }
-                    }
-                    else {
-                        Log.d(TAG, "permission denied for device " + device);
-                    }
-                }
-            }
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
