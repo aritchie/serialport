@@ -29,7 +29,7 @@ namespace Samples
                 if (this.ConnectText == "Connect")
                     return;
 
-                var bytes = Encoding.UTF8.GetBytes(this.CommandText);
+                var bytes = Encoding.UTF8.GetBytes(this.Command);
                 device.OutputStream.Write(bytes, 0, bytes.Length);
             });
 
@@ -109,9 +109,12 @@ namespace Samples
                 {
                     try
                     {
-                        await this.device.InputStream.ReadAsync(buffer, 0, buffer.Length, this.cancelSrc.Token);
-                        var msg = Encoding.UTF8.GetString(buffer);
-                        this.AppendText(msg);
+                        var read = await this.device.InputStream.ReadAsync(buffer, 0, buffer.Length, this.cancelSrc.Token);
+                        if (read > 0)
+                        {
+                            var msg = Encoding.UTF8.GetString(buffer);
+                            this.AppendText(msg);
+                        }
                     }
                     catch (Exception ex)
                     {

@@ -19,6 +19,7 @@ namespace Plugin.IO.SerialPort
 
 
         public string PortName => this.serialPort.PortName;
+        public string Identifier => "";
         public Stream InputStream => this.serialPort.BaseStream;
         public Stream OutputStream => this.serialPort.BaseStream;
         public bool IsConnected => this.serialPort.IsOpen;

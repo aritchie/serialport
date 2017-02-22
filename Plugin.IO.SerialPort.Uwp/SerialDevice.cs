@@ -10,16 +10,18 @@ namespace Plugin.IO.SerialPort
 {
     public class SerialDevice : ISerialDevice
     {
+        readonly DeviceInformation deviceInfo;
         Native device;
 
 
         public SerialDevice(DeviceInformation deviceInfo)
         {
-            this.PortName = deviceInfo.Id;
+            this.deviceInfo = deviceInfo;
         }
 
 
-        public string PortName { get; }
+        public string PortName => this.deviceInfo.Name;
+        public string Identifier => this.deviceInfo.Id;
         public Stream InputStream { get; private set; }
         public Stream OutputStream { get; private set; }
         public bool IsConnected => this.device != null;

@@ -23,5 +23,6 @@ namespace Samples
         public ICommand GoToDevice { get; }
         public ISerialDevice Device { get; }
         public string PortName => this.Device.PortName;
+        public string Identifier => this.Device.Identifier;
     }
 }

@@ -3,32 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.MainPage"
              Title="Serial Ports">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Find Devices" Command="{Binding FindDevices}" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}">
             <ListView.Header>
                 <StackLayout>
-                    <ActivityIndicator 
-                        IsRunning="{Binding IsLoading}" 
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
                         HorizontalOptions="Center"
                     />
-                    <Label 
-                        Text="No Devices Found" 
-                        HorizontalOptions="Center" 
-                        HorizontalTextAlignment="Center" 
-                        TextColor="Red" 
-                        IsVisible="{Binding NoDevicesFound}" 
+                    <Label
+                        Text="No Devices Found"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="Red"
+                        IsVisible="{Binding NoDevicesFound}"
                     />
                 </StackLayout>
             </ListView.Header>
-            
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding PortName}" Command="{Binding GoToDevice}" />
+                    <TextCell
+                        Text="{Binding PortName}"
+                        Detail="{Binding Identifier}"
+                        Command="{Binding GoToDevice}"
+                    />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

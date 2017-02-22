@@ -8,6 +8,7 @@ namespace Plugin.IO.SerialPort
     public interface ISerialDevice
     {
         string PortName { get; }
+        string Identifier { get; }
         Stream InputStream { get; }
         Stream OutputStream { get; }
         bool IsConnected { get; }
