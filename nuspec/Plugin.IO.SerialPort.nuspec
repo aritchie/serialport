@@ -3,13 +3,13 @@
     <metadata>
         <id>Plugin.IO.SerialPort</id>
         <version>1.0.0</version>
-        <title>ACR Serial Port Plugin for Android and Windows</title>
-        <summary>ACR Serial Port Plugin for Android and Windows</summary>
+        <title>ACR Serial Port Plugin</title>
+        <summary>ACR Serial Port Plugin</summary>
         <description>
-Cross Platform Serial Port Plugin for Xamarin
+Cross Platform Serial Port Plugin
 
 Supported Platforms
-Android 4.3+
+Android (coming soon)
 Windows
 NET Full 4.5
         </description>
@@ -19,10 +19,7 @@ NET Full 4.5
         <licenseUrl>https://github.com/aritchie/serialport/LICENSE.md</licenseUrl>
         <projectUrl>https://github.com/aritchie/serialport</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <tags>android windows uwp xamarin serial port reactive rx</tags>
-        <dependencies>
-            <dependency id="System.Reactive" version="[3.1.1, 4)" />
-        </dependencies>
+        <tags>android windows uwp xamarin serial port</tags>
         <releaseNotes>
 1.0
 Initial Public Release
@@ -33,7 +30,7 @@ Initial Public Release
         <file src="..\Plugin.IO.SerialPort\bin\Release\Plugin.IO.SerialPort.*" target="lib\netstandard1.0" />
 
         <!-- android -->
-        <file src="..\Plugin.IO.SerialPort.Android\bin\Release\Plugin.IO.SerialPort.*" target="lib\MonoAndroid10" />
+        <!--<file src="..\Plugin.IO.SerialPort.Android\bin\Release\Plugin.IO.SerialPort.*" target="lib\MonoAndroid10" />-->
 
         <!-- net45 -->
         <file src="..\Plugin.IO.SerialPort.Net\bin\Release\Plugin.IO.SerialPort.*" target="lib\net45" />
