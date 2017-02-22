@@ -10,20 +10,20 @@ namespace Plugin.IO.SerialPort
     public class SerialDevice : ISerialDevice
     {
         readonly UsbManager manager;
-        readonly UsbDevice device;
-        UsbDeviceConnection connection;
+        readonly UsbAccessory device;
+        SerialStream serialStream;
 
 
-        public SerialDevice(UsbDevice device, UsbManager manager)
+        public SerialDevice(UsbAccessory device, UsbManager manager)
         {
             this.device = device;
             this.manager = manager;
         }
 
 
-        public Stream InputStream { get; private set; }
+        public Stream InputStream => this.serialStream;
 
-        public Stream OutputStream { get; private set; }
+        public Stream OutputStream => this.serialStream;
 
         public bool IsConnected { get; private set; }
 
@@ -37,21 +37,18 @@ namespace Plugin.IO.SerialPort
 
         public void Close()
         {
-            this.connection?.Close();
-            this.connection = null;
+            this.serialStream?.Dispose();
         }
 
         public async Task Open()
         {
-            this.connection = this.manager.OpenDevice(this.device);
-            if (this.connection == null)
+            if (!this.manager.HasPermission(this.device))
             {
-                //this.manager.RequestPermission(this.device, Pend);
+                //this.manager.RequestPermission();
+                // TODO: callback
             }
-            //this.connection.SetConfiguration(new UsbConfiguration())
-            //this.connection.ControlTransfer(UsbAddressing.In, 0, 0, 0, buffer, 0, buffer.Length)
-            //this.manager.GetAccessoryList();
-            //this.manager.RequestPermission(this.device, PendingIntent.GetActivity());
+            var descriptor = this.manager.OpenAccessory(this.device).FileDescriptor;
+            this.serialStream = new SerialStream(descriptor);
         }
     }
 }

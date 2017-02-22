@@ -21,7 +21,7 @@ namespace Plugin.IO.SerialPort
 
         public Task<IEnumerable<ISerialDevice>> GetAvailableDevices()
         {
-            var devices = this.manager.DeviceList.Select(x => new SerialDevice(x.Value, this.manager));
+            var devices = this.manager.GetAccessoryList().Select(acc => new SerialDevice(acc, this.manager));
             return Task.FromResult<IEnumerable<ISerialDevice>>(devices);
         }
     }
@@ -103,7 +103,7 @@ private static final String ACTION_USB_PERMISSION = "com.multitools.andres.LCVie
                         if(device != null){
                             //call method to set up device communication
                         }
-                    } 
+                    }
                     else {
                         Log.d(TAG, "permission denied for device " + device);
                     }

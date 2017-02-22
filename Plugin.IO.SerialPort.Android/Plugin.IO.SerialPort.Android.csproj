@@ -49,11 +49,6 @@
     <Compile Include="SerialStream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Reactive">
-      <Version>3.1.1</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Plugin.IO.SerialPort.Abstractions\Plugin.IO.SerialPort.Abstractions.csproj">
       <Project>{dc7e56f4-ec2a-4ede-bbb9-ea885cfdcd3f}</Project>
       <Name>Plugin.IO.SerialPort.Abstractions</Name>
