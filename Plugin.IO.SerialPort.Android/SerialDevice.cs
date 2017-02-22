@@ -28,6 +28,7 @@ namespace Plugin.IO.SerialPort
         public bool IsConnected { get; private set; }
 
         public string PortName => "USB";
+        public string Identifier => "";
         public uint BaudRate { get; set; }
         public uint DataBits { get; set; }
         public Parity Parity { get; set; }
