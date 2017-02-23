@@ -2,13 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Plugin.IO.SerialPort</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>ACR Serial Port Plugin</title>
         <summary>ACR Serial Port Plugin</summary>
         <description>
 Cross Platform Serial Port Plugin
 
 Supported Platforms
+Netstandard 1.0
 Android (coming soon)
 Windows
 NET Full 4.5
@@ -27,7 +28,7 @@ Initial Public Release
     </metadata>
     <files>
         <!-- netstandard -->
-        <file src="..\Plugin.IO.SerialPort\bin\Release\Plugin.IO.SerialPort.*" target="lib\netstandard1.0" />
+        <file src="..\Plugin.IO.SerialPort\bin\Release\netstandard1.0\Plugin.IO.SerialPort.*" target="lib\netstandard1.0" />
 
         <!-- android -->
         <!--<file src="..\Plugin.IO.SerialPort.Android\bin\Release\Plugin.IO.SerialPort.*" target="lib\MonoAndroid10" />-->
