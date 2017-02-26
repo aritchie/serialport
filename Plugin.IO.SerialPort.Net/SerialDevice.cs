@@ -25,6 +25,13 @@ namespace Plugin.IO.SerialPort
         public bool IsConnected => this.serialPort.IsOpen;
 
 
+        public ushort DataBits
+        {
+            get { return (ushort)this.serialPort.DataBits; }
+            set { this.serialPort.DataBits = value; }
+        }
+
+
         public uint BaudRate
         {
             get { return (uint)this.serialPort.BaudRate; }
@@ -69,3 +76,4 @@ namespace Plugin.IO.SerialPort
         }
     }
 }
+

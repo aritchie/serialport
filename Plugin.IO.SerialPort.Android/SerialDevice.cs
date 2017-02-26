@@ -32,7 +32,7 @@ namespace Plugin.IO.SerialPort
         public string PortName => "USB";
         public string Identifier => "";
         public uint BaudRate { get; set; }
-        public uint DataBits { get; set; }
+        public ushort DataBits { get; set; }
         public Parity Parity { get; set; }
         public StopBit StopBit { get; set; }
 
@@ -54,7 +54,7 @@ namespace Plugin.IO.SerialPort
                 //if (DEBUG) Log.i(TAG, "Setting requestPermission -> MainMenu");
                 //mUsbManager.requestPermission(device, mPermissionIntent);
                 //https://developer.xamarin.com/api/member/Android.Hardware.Usb.UsbManager.RequestPermission/p/Android.Hardware.Usb.UsbDevice/Android.App.PendingIntent/
-                var permissionIntent = PendingIntent.GetBroadcast(Application.Context, 0, new Intent(UsbManager.), )
+                //var permissionIntent = PendingIntent.GetBroadcast(Application.Context, 0, new Intent(UsbManager.), )
                 //this.manager.RequestPermission();
                 // TODO: callback
             }
