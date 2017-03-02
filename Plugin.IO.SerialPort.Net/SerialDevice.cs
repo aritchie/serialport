@@ -4,6 +4,8 @@ using System.IO.Ports;
 using System.Threading.Tasks;
 using Native = System.IO.Ports.SerialPort;
 using NativeParity = System.IO.Ports.Parity;
+using NativeHandshake = System.IO.Ports.Handshake;
+
 
 namespace Plugin.IO.SerialPort
 {
@@ -23,6 +25,18 @@ namespace Plugin.IO.SerialPort
         public Stream InputStream => this.serialPort.BaseStream;
         public Stream OutputStream => this.serialPort.BaseStream;
         public bool IsConnected => this.serialPort.IsOpen;
+
+
+        Handshake handshake;
+        public Handshake Handshake
+        {
+            get { return this.handshake; }
+            set
+            {
+                this.handshake = value;
+                this.serialPort.Handshake = (NativeHandshake)Enum.Parse(typeof(NativeHandshake), value.ToString());
+            }
+        }
 
 
         public ushort DataBits

@@ -17,7 +17,7 @@ namespace Plugin.IO.SerialPort
         ushort DataBits { get; set; }
         Parity Parity { get; set; }
         StopBit StopBit { get; set; }
-        //Handshake Handshake { get; set; }
+        Handshake Handshake { get; set; }
 
         Task Open();
         void Close();

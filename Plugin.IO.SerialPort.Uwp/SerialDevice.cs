@@ -30,11 +30,12 @@ namespace Plugin.IO.SerialPort
         public ushort DataBits { get; set; } = 8;
         public Parity Parity { get; set; } = Parity.None;
         public StopBit StopBit { get; set; } = StopBit.One;
+        public Handshake Handshake { get; set; } = Handshake.None;
 
 
         public async Task Open()
         {
-            this.device = await Native.FromIdAsync(this.PortName);
+            this.device = await Native.FromIdAsync(this.deviceInfo.Id);
             this.device.BaudRate = this.BaudRate;
             this.device.DataBits = this.DataBits;
             //this.device.BreakSignalState
@@ -44,7 +45,7 @@ namespace Plugin.IO.SerialPort
             //this.device.UsbVendorId
             //this.device.ReadTimeout
             //this.device.WriteTimeout
-            //this.device.Handshake = (SerialHandshake)Enum.Parse(typeof(SerialHandshake), this.Handshake.ToString());
+            this.device.Handshake = (SerialHandshake)Enum.Parse(typeof(SerialHandshake), this.Handshake.ToString());
             this.device.Parity = (SerialParity)Enum.Parse(typeof(SerialParity), this.Parity.ToString());
             this.device.StopBits = (SerialStopBitCount)Enum.Parse(typeof(SerialStopBitCount), this.StopBit.ToString());
 

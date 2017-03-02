@@ -35,6 +35,7 @@ namespace Plugin.IO.SerialPort
         public ushort DataBits { get; set; }
         public Parity Parity { get; set; }
         public StopBit StopBit { get; set; }
+        public Handshake Handshake { get; set; }
 
 
         public void Close()
