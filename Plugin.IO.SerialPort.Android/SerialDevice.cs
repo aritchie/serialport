@@ -1,6 +1,8 @@
 ﻿#if __ANDROID__ || __IOS__
 using System;
 using System.IO;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -36,6 +38,11 @@ namespace Plugin.IO.SerialPort
         public Parity Parity { get; set; }
         public StopBit StopBit { get; set; }
         public Handshake Handshake { get; set; }
+        public bool IsRequestToSendEnabled { get; set; }
+        public bool IsDataTerminalReadyEnabled { get; set; }
+        public TimeSpan ReadTimeout { get; set; }
+        public TimeSpan WriteTimeout { get; set; }
+        public Encoding Encoding { get; set; }
 
 
         public void Close()
@@ -61,6 +68,42 @@ namespace Plugin.IO.SerialPort
             }
             var descriptor = this.manager.OpenAccessory(this.device).FileDescriptor;
             this.serialStream = new SerialStream(descriptor);
+        }
+
+
+        public void WriteLine(string msg)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public string ReadLine()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public int Read(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

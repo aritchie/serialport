@@ -109,7 +109,9 @@ namespace Samples
                 {
                     try
                     {
-                        var read = await this.device.InputStream.ReadAsync(buffer, 0, buffer.Length, this.cancelSrc.Token);
+                        var read = await this.device.InputStream
+                            .ReadAsync(buffer, 0, buffer.Length, this.cancelSrc.Token)
+                            .ConfigureAwait(false);
                         if (read > 0)
                         {
                             var msg = Encoding.UTF8.GetString(buffer);
