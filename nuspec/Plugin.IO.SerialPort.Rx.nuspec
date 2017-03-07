@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Plugin.IO.SerialPort.Rx</id>
+        <version>1.0.0</version>
+        <title>ACR Serial Port Plugin Reactive Extensions</title>
+        <summary>ACR Serial Port Plugin Reactive Extensions</summary>
+        <description>ACR Serial Port Plugin Reactive Extensions</description>
+        <authors>Allan Ritchie</authors>
+        <owners>Allan Ritchie</owners>
+        <iconUrl>https://github.com/aritchie/serialport/raw/master/icon.png</iconUrl>
+        <licenseUrl>https://github.com/aritchie/serialport/LICENSE.md</licenseUrl>
+        <projectUrl>https://github.com/aritchie/serialport</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>android windows uwp xamarin serialport serial rx reactive</tags>
+        <releaseNotes>
+1.0
+Initial Public Release
+        </releaseNotes>
+        <dependencies>
+            <dependency id="System.Reactive" version="[3.11, 4)" />
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- netstandard -->
+        <file src="..\Plugin.IO.SerialPort.Rx\bin\Release\netstandard1.0\Plugin.IO.SerialPort.Rx.*" target="lib\netstandard1.0" />
+    </files>
+</package>

@@ -27,18 +27,16 @@ namespace Plugin.IO.SerialPort.Rx
 
         public static IObservable<byte[]> Request(this ISerialDevice device, byte[] sendBytes, int readBufferSize)
         {
-            return Observable.Create<byte[]>(ob =>
+            return Observable.Create<byte[]>(async ob =>
             {
+                var cancelSrc = new CancellationTokenSource();
                 var buffer = new byte[readBufferSize];
-                device.Write(sendBytes, 0, sendBytes.Length);
-                device.Read(buffer, 0, buffer.Length);
+                await device.WriteAsync(sendBytes, 0, sendBytes.Length, cancelSrc.Token);
+                await device.ReadAsync(buffer, 0, buffer.Length, cancelSrc.Token);
                 ob.OnNext(buffer);
                 ob.OnCompleted();
 
-                return () =>
-                {
-
-                };
+                return cancelSrc.Cancel;
             });
         }
     }

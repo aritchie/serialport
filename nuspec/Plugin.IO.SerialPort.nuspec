@@ -20,8 +20,19 @@ NET Full 4.5
         <licenseUrl>https://github.com/aritchie/serialport/LICENSE.md</licenseUrl>
         <projectUrl>https://github.com/aritchie/serialport</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <tags>android windows uwp xamarin serial port</tags>
+        <tags>android windows uwp xamarin serialport serial</tags>
         <releaseNotes>
+1.0.3
+Lots of new methods
+RX methods (another package)
+Bugfixes
+
+1.0.2
+Bugfixes
+
+1.0.1
+Bugfixes
+
 1.0
 Initial Public Release
         </releaseNotes>

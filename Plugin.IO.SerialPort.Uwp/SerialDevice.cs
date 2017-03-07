@@ -83,8 +83,14 @@ namespace Plugin.IO.SerialPort
 
         public string ReadLine()
         {
-            //this.reader.ReadString()
-            return "";
+            var sb = new StringBuilder();
+            var s = this.reader.ReadString(256);
+            while (!s.Contains(Environment.NewLine))
+            {
+                sb.Append(s);
+                s = this.reader.ReadString(256);
+            }
+            return sb.ToString();
         }
 
 
@@ -102,6 +108,7 @@ namespace Plugin.IO.SerialPort
         public void Write(byte[] buffer, int offset, int count)
             => this.writer.WriteBuffer(buffer.AsBuffer(), (uint)offset, (uint)count);
 
+
         public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
         {
             var read = await this.reader.LoadAsync((uint) count).AsTask(cancelToken);
@@ -110,9 +117,10 @@ namespace Plugin.IO.SerialPort
         }
 
 
-        public Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
+        public async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
         {
-            throw new NotImplementedException();
+            this.writer.WriteBytes(buffer);
+            await this.writer.FlushAsync();
         }
     }
 }

@@ -130,18 +130,8 @@ namespace Plugin.IO.SerialPort
             => this.serialPort.BaseStream.ReadAsync(buffer, offset, count, cancelToken);
         public Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
             => this.serialPort.BaseStream.WriteAsync(buffer, offset, count, cancelToken);
-
-
-        public void WriteLine(string msg)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public string ReadLine()
-        {
-            throw new NotImplementedException();
-        }
+        public void WriteLine(string msg) => this.serialPort.WriteLine(msg);
+        public string ReadLine() => this.serialPort.ReadLine();
     }
 }
 

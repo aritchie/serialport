@@ -20,14 +20,7 @@ namespace Samples
                 var devs = await CrossSerialPort.Current.GetAvailableDevices();
                 this.Devices = devs.Select(x => new DeviceItemViewModel(x)).ToList();
                 this.IsLoading = false;
-                if (this.Devices.Count > 0)
-                {
-                    this.NoDevicesFound = false;
-                }
-                else
-                {
-                    this.NoDevicesFound = true;
-                }
+                this.NoDevicesFound = this.Devices.Count == 0;
 
                 this.OnPropertyChanged(String.Empty);
             });
