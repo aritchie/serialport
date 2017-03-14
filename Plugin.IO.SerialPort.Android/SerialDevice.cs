@@ -1,98 +1,124 @@
-﻿#if __ANDROID__ || __IOS__
 using System;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.Hardware.Usb;
+using Android.Things.Pio;
 
 
 namespace Plugin.IO.SerialPort
 {
     public class SerialDevice : ISerialDevice
     {
-        readonly UsbManager manager;
-        readonly UsbAccessory device;
-        SerialStream serialStream;
+        readonly PeripheralManagerService manager;
+        UartDevice device;
 
 
-        public SerialDevice(UsbAccessory device, UsbManager manager)
+        public SerialDevice(PeripheralManagerService manager, string portName)
         {
-            this.device = device;
             this.manager = manager;
+            this.PortName = portName;
         }
 
 
-        public Stream InputStream => this.serialStream;
+        public string PortName { get; }
+        public string Identifier { get; }
 
-        public Stream OutputStream => this.serialStream;
 
         public bool IsConnected { get; private set; }
 
-        public string PortName => "USB";
-        public string Identifier => "";
-        public uint BaudRate { get; set; }
-        public ushort DataBits { get; set; }
-        public Parity Parity { get; set; }
-        public StopBit StopBit { get; set; }
-        public Handshake Handshake { get; set; }
+
+        uint baudRate = 9600;
+        public uint BaudRate
+        {
+            get { return this.baudRate; }
+            set
+            {
+                this.baudRate = value;
+                this.device?.SetBaudrate((int)value);
+            }
+        }
+
+
+        ushort dataBits = 8;
+        public ushort DataBits
+        {
+            get { return this.dataBits; }
+            set
+            {
+                this.dataBits = value;
+                this.device?.SetDataSize(this.dataBits);
+            }
+        }
+
+
         public bool IsRequestToSendEnabled { get; set; }
         public bool IsDataTerminalReadyEnabled { get; set; }
         public TimeSpan ReadTimeout { get; set; }
         public TimeSpan WriteTimeout { get; set; }
-        public Encoding Encoding { get; set; }
 
+        Parity parity = Parity.None;
+        public Parity Parity
+        {
+            get { return this.parity; }
+            set
+            {
+                this.parity = value;
+                //this.device?.SetParity()
+            }
+        }
+
+
+        StopBit stopBit = StopBit.One;
+        public StopBit StopBit
+        {
+            get { return this.stopBit; }
+            set
+            {
+                this.stopBit = value;
+
+            }
+        }
+
+
+        public Handshake Handshake { get; set; }
+
+
+        public Task Open()
+        {
+            if (this.IsConnected)
+                return Task.CompletedTask;
+
+            this.device = this.manager.OpenUartDevice(this.PortName);
+            this.IsConnected = true;
+            //this.device.SetHardwareFlowControl()
+            //this.device.RegisterUartDeviceCallback(new UartDeviceCallback())
+            return Task.CompletedTask;
+        }
 
         public void Close()
         {
-            this.serialStream?.Dispose();
-        }
-
-        public async Task Open()
-        {
-            if (!this.manager.HasPermission(this.device))
-            {
-                //mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
-                //if (DEBUG) Log.i(TAG, "Setting IntentFilter -> MainMenu");
-                //IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-                //if (DEBUG) Log.i(TAG, "Setting registerReceiver -> MainMenu");
-                //registerReceiver(mUsbReceiver, filter);
-                //if (DEBUG) Log.i(TAG, "Setting requestPermission -> MainMenu");
-                //mUsbManager.requestPermission(device, mPermissionIntent);
-                //https://developer.xamarin.com/api/member/Android.Hardware.Usb.UsbManager.RequestPermission/p/Android.Hardware.Usb.UsbDevice/Android.App.PendingIntent/
-                //var permissionIntent = PendingIntent.GetBroadcast(Application.Context, 0, new Intent(UsbManager.), )
-                //this.manager.RequestPermission();
-                // TODO: callback
-            }
-            var descriptor = this.manager.OpenAccessory(this.device).FileDescriptor;
-            this.serialStream = new SerialStream(descriptor);
+            this.device?.Close();
+            this.device = null;
+            this.IsConnected = false;
         }
 
 
+        public Stream InputStream { get; }
+        public Stream OutputStream { get; }
+        public Encoding Encoding { get; set; }
         public void WriteLine(string msg)
         {
             throw new NotImplementedException();
         }
-
 
         public string ReadLine()
         {
             throw new NotImplementedException();
         }
 
-
-        public int Read(byte[] buffer, int offset, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public void Write(byte[] buffer, int offset, int count)
-        {
-            throw new NotImplementedException();
-        }
+        public int Read(byte[] buffer, int offset, int count) => this.device.Read(buffer, count);
+        public void Write(byte[] buffer, int offset, int count) => this.device.Write(buffer, count);
 
 
         public Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancelToken)
@@ -107,4 +133,3 @@ namespace Plugin.IO.SerialPort
         }
     }
 }
-#endif

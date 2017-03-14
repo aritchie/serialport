@@ -21,7 +21,15 @@ NET Full 4.5
         <projectUrl>https://github.com/aritchie/serialport</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>android windows uwp xamarin serialport serial</tags>
+        <dependencies>
+            <group targetFramework="MonoAndroid10">
+                <dependency id="Xamarin.Android.Things" version="[0.1.1-devpreview, 2)" />
+            </group>
+        </dependencies>
         <releaseNotes>
+1.0.4
+Android "Things" support
+
 1.0.3
 Lots of new methods
 RX methods (another package)
